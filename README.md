@@ -16,5 +16,7 @@ Bu sinifta su methodlari tanimlayiniz;
     1.arabayi_durdur (“araba durdu” seklinde ekrana yazsin)
     2. gaza_bas(“araba hizlaniyor” seklinde ekrana yazsin)
     3.  arabayi_yavaslat(“araba yavasliyor” seklinde ekrana yazsin)
-    4. arabanin_durumunu goster(bir kosul durumu yaziniz;eger Araba sinifi Tasit sinifinin alt sinifi ise “Bu sinif Tasit sinifindan miras alinmistir” seklinde cikti versin. Degilse ‘ Araba sinifi Tasit sinifindan miras alinmamistir.’ seklinde yazsin)
+    4. arabanin_durumunu goster(bir kosul durumu yaziniz;eger Araba sinifi Tasit sinifinin alt sinifi ise 
+    “Bu sinif Tasit sinifindan miras alinmistir” seklinde cikti versin. Degilse ‘ Araba sinifi Tasit sinifindan 
+    miras alinmamistir.’ seklinde yazsin)
 Ayrica bu Araba sinifinda; modelini goster isimli Tasit sinifina ait methodu override ediniz ve ‘Araba sinifinin methodu….’ seklinde ekrana cikti veriniz ve modeli yazdiriniz.
