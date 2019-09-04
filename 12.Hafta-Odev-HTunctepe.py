@@ -1,13 +1,14 @@
+import copy
+
+
 class Vehicle(object):
     list_of_vehicles = []
+    vehicleList = []
+
     no_of_vehicles = 0
     no_of_wheels = 4        # tekerlek_sayisi degiskeni
     current_speed = 0       # Istenilmemis ama, extra bir ozellik olarak, durdurma, hizlandirma ve yavaslatma
                             # fonksiyonlarinda kullanilmak uzere olusturdum.
-
-    # def CarList(self):
-    #     Vehicle.list_of_vehicles = [k for k, v in globals().items() if v is self]
-    #     return Vehicle.list_of_vehicles
 
     def __init__(self, make, model, color, engine_power, no_of_seats, km_stand, year_of_sales):
         self.make = make                        # markasi
@@ -17,11 +18,10 @@ class Vehicle(object):
         self.no_of_seats = no_of_seats          # koltuk_sayisi
         self.km_stand = km_stand                # km_durumu
         self.year_of_sales = year_of_sales      # satis yili
-        Vehicle.list_of_vehicles.append(self)   # Olusturulan objeler bu listeye ekleniyor
+        # Vehicle.list_of_vehicles.append(self)   # Olusturulan objeler bu listeye ekleniyor, obje degiskenleri degil
         Vehicle.no_of_vehicles += 1             # Her arac olusturuldugunda, arac sayisi 1 artiyor
                                                 # 4. tasit miktarini_guncelle. Sinif her orneklendiginde
                                                 # tasit miktarini 1 artirmali.
-        # Vehicle.CarList(self)
 
 
 # 1.koltuk sayisini goster(tasitin koltuk sayisini ekrana yazdirmali
@@ -31,7 +31,7 @@ class Vehicle(object):
 
 # 2.modelini goster (tasitin modelini ekrana yazdirmali)
     def ShowCarModel(self):
-        print('\nCar Model: ' + f'{self.model}')
+        print('\nCar Make/Model: ' + f'{self.make}' + ' ' + f'{self.model}')
 
 # 3. km_durumunu al (tasitin kilometre durumunu return etmeli)
     def ShowCar_KM_Stand(self):
@@ -88,30 +88,52 @@ class Car(Vehicle):
             print('\nBe careful!!! Car is going backwards!'
                   '\nDriving backwards is difficult.')
 
-    # 4. arabanin_durumunu goster(bir kosul durumu yaziniz;eger Araba sinifi Tasit sinifinin alt sinifi ise
-    # “Bu sinif Tasit sinifindan miras alinmistir” seklinde cikti versin. Degilse ‘ Araba sinifi Tasit sinifindan
-    # miras alinmamistir.’ seklinde yazsin)
-    # ######## Bu kismi pek acik degil. Onceki belirttiginiz gereksinimlere gore zaten ####################
-    # ######## Araba sinifi, Tasit sinifinin alt sinifi. Bu bahsettiginiz nasil olacak anlamadim. ########
+    # ---- 4. arabanin_durumunu goster(bir kosul durumu yaziniz;eger Araba sinifi Tasit sinifinin alt sinifi ise ----
+    # ---- “Bu sinif Tasit sinifindan miras alinmistir” seklinde cikti versin. ---
+    # ---- Degilse ‘ Araba sinifi Tasit sinifindan miras alinmamistir.’ seklinde yazsin) ----
+    # ---- ### Bu kismi pek acik degil. Onceki belirttiginiz gereksinimlere gore zaten #############----
+    # ---- ### Araba sinifi, Tasit sinifinin alt sinifi. Bu bahsettiginiz nasil olacak anlamadim. ##----
 
     def ShowCarStatus(self):
         if issubclass(Car, Vehicle):
             print('\nThis class is inherited from the Vehicle class.\n')
+        else:   # Bu kosula hicbir zaman girmeyecek. Bu sekilde soylenildigi icin boyle yaptim.
+            print('\nThis class is NOT inherited from the Vehicle class.\n')
+
+    def ShowCarModel(self):
+        print('\nThis is a method of Car class.')
+        super().ShowCarModel()
+        # print('\nCar Model: ' + f'{self.model}')
 
 
 vehicle1 = Vehicle('Honda', 'Civic', 'Blue', 90, 5, 15000, 2015)
 vehicle2 = Vehicle('Toyota', 'Corolla', 'Pearl White', 100, 5, 12000, 2016)
 car1 = Car('Mercedes', 'E200', 'Black', 100, 5, 32000, 2017, 220)
-car2 = Car('Audi', 'Q7', 'Red', 130, 7, 500, 2019, 220)
+car2 = Car('Audi', 'Q7', 'Red', 130, 7, 500, 2019, 240)
+car3 = Car('BMW', 'X5', 'Silver', 125, 5, 14000, 2018, 240)
 
-# print(Vehicle.list_of_vehicles)
-# for i in Vehicle.list_of_vehicles:
-#     print(Vehicle.show_car_info(Vehicle.list_of_vehicles[i]))
 
-# vehicle1.show_cars_detailed_info()
-# vehicle2.show_cars_detailed_info()
-# car1.show_cars_detailed_info()
-# Car.show_cars_detailed_info(car2)
+print('\n' + 'INVENTORY REPORT'.center(40) + '\n' + '-'*40)
+print('\nCurrent number of vehicles available: ' + str(Vehicle.no_of_vehicles))
+
+# ----Asagidaki kisim, nasil calistigini anlamasam da, olusturulan nesne isimlerini----
+# ----Vehicle sinifinin bir attribute'u olan list_of_vehicles listesine akliyor.----
+# ----Internetteki bir ornekten, kendi koduma uyarladim. Kod icin Referans icin sayfanin en altina bakin. ----
+# ----Olusturulan objeler listesini gormek icin asagidaki triple quotes icindeki kodu yorumdan kaldirin. ----
+
+vars_frozen = copy.copy(vars())
+for key in vars_frozen:
+    if isinstance(eval(key), Vehicle):
+        Vehicle.list_of_vehicles.append(key)
+
+print('Current vehicles available:')
+print(*Vehicle.list_of_vehicles, sep=', ')
+
+vehicle1.show_cars_detailed_info()
+vehicle2.show_cars_detailed_info()
+car1.show_cars_detailed_info()
+Car.show_cars_detailed_info(car2)
+Car.show_cars_detailed_info(car3)
 #
 # print("\nCar's KM Stand: " + str(car1.ShowCar_KM_Stand()))
 # car1.ShowCarModel()
@@ -124,3 +146,9 @@ car2 = Car('Audi', 'Q7', 'Red', 130, 7, 500, 2019, 220)
 # car1.StopTheCar()
 # Car.ShowCarStatus(car2)
 
+
+# Reference Link (Asagidaki iki satiri (155, 156) bosluksuz birbine ekleyin
+# ---------------------------------------------------------------------------------
+# https://www.daniweb.com/programming/software-development/threads/300978/
+# how-to-retrieve-the-name-of-an-instance-of-a-class-as-a-string
+# Vegaseat adli kullanicinin kodunun 13-19 satirlari arasindaki kodundan uyarladim.
