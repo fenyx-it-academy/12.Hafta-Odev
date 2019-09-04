@@ -147,7 +147,7 @@ Car.show_cars_detailed_info(car3)
 # Car.ShowCarStatus(car2)
 
 
-# Reference Link (Asagidaki iki satiri (155, 156) bosluksuz birbine ekleyin
+# Reference Link (Asagidaki iki satiri (152, 153) bosluksuz birbine ekleyin
 # ---------------------------------------------------------------------------------
 # https://www.daniweb.com/programming/software-development/threads/300978/
 # how-to-retrieve-the-name-of-an-instance-of-a-class-as-a-string
