@@ -76,30 +76,6 @@ moongo.km_durumuShow()
 moongo.satis_yiliShow()
 moongo.tekerlek_sayisiShow()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ############################################################################################3
 
 class Araba(Tasit):
