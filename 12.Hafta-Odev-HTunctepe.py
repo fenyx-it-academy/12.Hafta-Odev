@@ -4,13 +4,14 @@ import copy
 class Vehicle(object):
     list_of_vehicles = []
     vehicleList = []
-
     no_of_vehicles = 0
-    no_of_wheels = 4        # tekerlek_sayisi degiskeni
+
     current_speed = 0       # Istenilmemis ama, extra bir ozellik olarak, durdurma, hizlandirma ve yavaslatma
                             # fonksiyonlarinda kullanilmak uzere olusturdum.
 
     def __init__(self, make, model, color, engine_power, no_of_seats, km_stand, year_of_sales):
+        self.no_of_wheels = 4                   # tekerlek_sayisi degiskeni istenildigi gibi
+                                                # ornek niteligi olacak sekilde degistirildi.
         self.make = make                        # markasi
         self.model = model                      # modeli
         self.color = color                      # rengi
@@ -18,11 +19,14 @@ class Vehicle(object):
         self.no_of_seats = no_of_seats          # koltuk_sayisi
         self.km_stand = km_stand                # km_durumu
         self.year_of_sales = year_of_sales      # satis yili
-        # Vehicle.list_of_vehicles.append(self)   # Olusturulan objeler bu listeye ekleniyor, obje degiskenleri degil
-        Vehicle.no_of_vehicles += 1             # Her arac olusturuldugunda, arac sayisi 1 artiyor
-                                                # 4. tasit miktarini_guncelle. Sinif her orneklendiginde
-                                                # tasit miktarini 1 artirmali.
-
+        self.UpdateNoOfVehicles()
+    # Vehicle.no_of_vehicles += 1               # Her arac olusturuldugunda, arac sayisi 1 artiyor
+    # 23. satirdaki kod, tasit miktarini        # 4. tasit miktarini_guncelle. Sinif her orneklendiginde
+    # otomatik olarak ve daha effektif          # tasit miktarini 1 artirmali.
+    # bir sekilde arttirdigi halde, verilen
+    # feedback'te fonksiyon olarak istenildigi
+    # icin, fonksiyon kullanarak arttirma
+    # islemi yapildi.
 
 # 1.koltuk sayisini goster(tasitin koltuk sayisini ekrana yazdirmali
     def ShowNoOfSeats(self):
@@ -40,22 +44,27 @@ class Vehicle(object):
     def show_cars_detailed_info(self):
         print('\n' + '-'*30 + '\nMake:\t\t\t' + f'{self.make}' + '\nModel:\t\t\t' + f'{self.model}' +
               '\nColor:\t\t\t' + f'{self.color}' + '\nEngine Power:\t' + f'{self.engine_power}' +
-              '\nNo Of Seats:\t' + f'{self.no_of_seats}' + '\nKM Stand:\t\t' + f'{self.km_stand}' +
-              '\nSales Year:\t\t' + f'{self.year_of_sales}')
+              '\nNo Of Seats:\t' + f'{self.no_of_seats}' + '\nNo Of Wheels:\t' + f'{self.no_of_wheels}' +
+              '\nKM Stand:\t\t' + f'{self.km_stand}' + '\nSales Year:\t\t' + f'{self.year_of_sales}')
+
+    def UpdateNoOfVehicles(self):
+        Vehicle.vehicleList.append(1)
+
 
 # - bu sinifa ait ozellik olan tasit_miktari’ni sinif disarisindan ulasilamayacak sekilde gizleyiniz.
 # - class method olarak tasit_miktarini gosterecek bir method tanimlayiniz.
     @classmethod
     def ShowNoOfVehicles(cls):
-        print('\nNo of Vehicles: ' + len(cls.list_of_vehicles) + '\n' + 'Vehicles: ' + ', '.join(cls.list_of_vehicles))
+        print('\nNo of Vehicles: ' + str(len(cls.list_of_vehicles)) + '\n' +
+              'Vehicles: ' + ', '.join(cls.list_of_vehicles))
 
 
-# ########Sorunun devaminda, bir Araba sinifi tanimlayiniz ve bu sinifi,
-# ########Tasit sinifindan miras aliniz.
-# ########Tasit sinifindan miras aldiginiz init fonksiyonunu muhafaza ediniz ve
-# ########max_hiz isimli bir ornek niteligi tanimlayiniz ve
-# ########bu nitelik her orneklenme durumunda parametre olarak verilsin.
-# ########Bu sinifta su methodlari tanimlayiniz;
+# ######## Sorunun devaminda, bir Araba sinifi tanimlayiniz ve bu sinifi,
+# ######## Tasit sinifindan miras aliniz.
+# ######## Tasit sinifindan miras aldiginiz init fonksiyonunu muhafaza ediniz ve
+# ######## max_hiz isimli bir ornek niteligi tanimlayiniz ve
+# ######## bu nitelik her orneklenme durumunda parametre olarak verilsin.
+# ######## Bu sinifta su methodlari tanimlayiniz;
 
 class Car(Vehicle):
     def __init__(self, make, model, color, engine_power, no_of_seats, km_stand, year_of_sales, max_speed):
@@ -67,18 +76,15 @@ class Car(Vehicle):
         super().show_cars_detailed_info()
         print('Max Speed:\t\t' + f'{self.max_speed}')
 
-
     def StopTheCar(self):           # 1.arabayi_durdur (“araba durdu” seklinde ekrana yazsin)
         Vehicle.current_speed = 0
         print('\nThe car ' + f'{self.make}' + ' ' + f'{self.model}' + ' has stopped!' +
               '\nCurrent Speed: ' + str(Vehicle.current_speed))
 
-
     def SpeedUp(self):              # 2. gaza_bas(“araba hizlaniyor” seklinde ekrana yazsin)
         Vehicle.current_speed += 50
         print('\nThe car ' + f'{self.make}' + ' ' + f'{self.model}' + ' speeding up!' +
               '\nCurrent Speed: ' + str(Vehicle.current_speed))
-
 
     def SlowDown(self):             # 3.  arabayi_yavaslat(“araba yavasliyor” seklinde ekrana yazsin)
         Vehicle.current_speed -= 50
@@ -114,7 +120,7 @@ car3 = Car('BMW', 'X5', 'Silver', 125, 5, 14000, 2018, 240)
 
 
 print('\n' + 'INVENTORY REPORT'.center(40) + '\n' + '-'*40)
-print('\nCurrent number of vehicles available: ' + str(Vehicle.no_of_vehicles))
+print('\nCurrent number of vehicles available: ' + str(len(Vehicle.vehicleList)))
 
 # ----Asagidaki kisim, nasil calistigini anlamasam da, olusturulan nesne isimlerini----
 # ----Vehicle sinifinin bir attribute'u olan list_of_vehicles listesine akliyor.----
@@ -141,10 +147,10 @@ Car.show_cars_detailed_info(car3)
 # car1.ShowNoOfSeats()
 # car1.show_cars_detailed_info()
 # car1.SpeedUp()
-#  Try car1.SpeedUp() is commented and uncommented before the line below.
 # car1.SlowDown()
 # car1.StopTheCar()
 # Car.ShowCarStatus(car2)
+
 
 
 # Reference Link (Asagidaki iki satiri (152, 153) bosluksuz birbine ekleyin
