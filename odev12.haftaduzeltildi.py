@@ -19,6 +19,9 @@ class Tasit(object):
     def km_durumunual(self):
         print("aracin km_durumu:\t",self.kmd)
 
+    def tasit_miktar_guncelle(self):
+        return print(len(self.__tasit_miktari))
+
     @classmethod
     def tasit_miktari_goruntule(cls):
         return len(cls.__tasit_miktari)
@@ -56,3 +59,4 @@ skoda=Araba(200,8,2000,2015,2018,280)
 print(audi.tekerlek_sayisi)
 print(Tasit.tasit_miktari_goruntule())
 skoda.arabanin_durumunu_goster()
+audi.tasit_miktar_guncelle()
