@@ -9,6 +9,8 @@ class Tasit():
         self.satisYili = satisYili
         self.tekerlek_sayisi = 4
         Tasit.__tasitMiktari.append(self)
+    def __str__(self):
+        return "\n\nAraba ozellikleri: \nmotorGucu:{}\n koltukSayisi:{}\n kmDurumu:{}\n modeli:{}\n satisYili:{}".format(self.motorGucu,self.koltukSayisi, self.kmDurumu, self.modeli, self.satisYili)
 
     def koltukSayisiniGoster(self):
         print("Aracın koltuk sayisi: ", self.koltukSayisi)
@@ -25,6 +27,8 @@ class Tasit():
         print("Taşıt miktarı: ", len(cls.__tasitMiktari))
         return len(cls.__tasitMiktari)
 
+   
+
 
 t1 = Tasit(3.2, 5, 23412, 2014, 2019)
 t2 = Tasit(1.6, 4, 12345, 2013, 2015)
@@ -35,7 +39,6 @@ t1.kmDurumuGoster()
 t1.tasitMiktariGoster()
 
 print("------------------------------------------------")
-
 
 # inherit
 class Araba(Tasit):
@@ -71,3 +74,5 @@ a1.arabayiYavaslat()
 a1.arabaninDurumu()
 
 a1.modeliniGoster()
+
+print(t1,t2,a1,a2)
