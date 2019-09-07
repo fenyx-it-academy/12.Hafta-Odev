@@ -8,7 +8,7 @@ class tasit():
         self.modeli=modeli
         self.sais_yili=satis_yili
         self.__tasit_miktari_guncelle()
-        tekerlek_sayisi=4
+        self.tekerlek_sayisi=4
 
     def koltuk_sayisi_goster(self):
         print("bu aracin koltuk sayisi:",self.koltuk_sayisi)
