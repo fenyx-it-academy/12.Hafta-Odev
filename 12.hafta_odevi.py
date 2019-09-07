@@ -98,8 +98,8 @@ class Araba(Tasit):                                 # child class
         print('Araba sinifinin methodu….')
         print(f'modeli : {self.modeli}')
 
-    def durum(self):                                 # isinstance ile inheritance durumunu sorguladik
-        if isinstance(self.marka, Tasit):            # isinstance(object, classinfo)
+    def durum(self):                                 # issubclass ile inheritance durumunu sorguladik
+        if issubclass(self.marka, Tasit):            
             print('Bu sinif Tasit sinifindan miras alinmistir')
         else:
             print('Araba sinifi Tasit sinifindan miras alinmamistir.')
