@@ -49,7 +49,7 @@ class Tasit:
         print(f'tasitimizin koltuk sayisi : {self.koltuk_sayisi}')
 
     def model_goster(self):
-        print(f'tasitin modeli : {self.modeli}')
+        print(f'modeli : {self.modeli}')
 
     def km_durumunu_goster(self):
         return f'tasitin km durumu : {self.km_durumu}'
@@ -96,7 +96,7 @@ class Araba(Tasit):                                 # child class
 
     def model_goster(self):                          # modeli goster metodunu overding yaptik
         print('Araba sinifinin methodu….')
-        print(f'modeli : {self.modeli}')
+        super().model_goster()
 
     def durum(self):                                 # issubclass ile inheritance durumunu sorguladik
         if issubclass(self.marka, Tasit):            
