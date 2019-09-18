@@ -25,7 +25,8 @@ class Tasit:
         print('Arac satis yili :',self.satis_yili)
 #yukasrida methot lar ile kullaniciya istedigi bilgileri goruntuledik
 #classmethod ile classda kac tane kayit oldugunu gosterdik
-
+    def tasit_guncelle(self):
+        return print('Guncel listenizde {} arac bulunmaktadir. '.format(len(self.__tasit_sayisi)))
     @classmethod
     def goruntule_tasitsayisi(cls):
         print('Kayitli tasit sayisi',len(cls.__tasit_sayisi))
@@ -68,3 +69,4 @@ hacimurat.goruntule_araba_durumu()
 hacimurat.araba_dursun()
 hacimurat.araba_hizlansin()
 hacimurat.araba_yavaslat()
+woswos.tasit_guncelle()
